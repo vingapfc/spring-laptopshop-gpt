@@ -16,6 +16,15 @@ public class Laptop {
     private String model;
     private double price;
 
+    public Laptop() {
+    }
+
+    public Laptop(String brand, String model, double price) {
+        this.brand = brand;
+        this.model = model;
+        this.price = price;
+    }
+
     public long getId() {
         return id;
     }

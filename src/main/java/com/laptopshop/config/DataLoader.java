@@ -6,13 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.laptopshop.repository.LaptopRepositery;
+import com.laptopshop.repository.LaptopRepository;
 
 @Configuration
 public class DataLoader {
 
     @Bean
-    CommandLineRunner loadData(LaptopRepositery repo) {
+    CommandLineRunner loadData(LaptopRepository repo) {
         return args -> {
             repo.save(new Laptop("Dell", "Inspiron 15", 850.0));
             repo.save(new Laptop("HP", "Pavilion 14", 750.0));

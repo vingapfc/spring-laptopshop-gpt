@@ -9,6 +9,7 @@
 </head>
 
 <body class="container mt-4">
+    <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
     <h2>Danh sách laptop</h2>
 
     <table class="table table-bordered">

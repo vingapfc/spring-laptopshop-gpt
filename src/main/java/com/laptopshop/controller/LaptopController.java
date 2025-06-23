@@ -11,6 +11,7 @@ import com.laptopshop.repository.LaptopRepository;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 
 @Controller
@@ -35,11 +36,13 @@ public class LaptopController {
 
     @PostMapping("/laptops/save")
     public String saveLaptop(@Valid @ModelAttribute("laptop") com.laptopshop.model.Laptop laptop,
-            BindingResult result) {
+            BindingResult result,
+            RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "laptop-form";
         }
         repository.save(laptop);
+        redirectAttributes.addFlashAttribute("successMessage", "Đã lưu thành công!");
         return "redirect:/laptops";
     }
 
@@ -51,8 +54,9 @@ public class LaptopController {
     }
 
     @GetMapping("/laptops/delete/{id}")
-    public String deleteLaptop(@PathVariable Long id, Model model) {
+    public String deleteLaptop(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         repository.deleteById(id);
+        redirectAttributes.addFlashAttribute("successMessage", "Đã xoá thành công!");
         return "redirect:/laptops";
     }
 

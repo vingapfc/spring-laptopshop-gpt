@@ -9,6 +9,7 @@
 <body class="conteiner mt-4">
     <h2>Thêm Laptop Mới</h2>
     <form th:action="@{/laptops/save}" th:object="${laptop}" method="post">
+        <input type="hidden" th:field="*{id}" />
         <div class="mb-3">
             <label>Thương hiệu:</label>
             <input type="text" th:field="*{brand}" class="form-control" />

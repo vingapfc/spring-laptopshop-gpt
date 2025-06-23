@@ -9,17 +9,20 @@
 <body class="conteiner mt-4">
     <h2>Thêm Laptop Mới</h2>
     <form th:action="@{/laptops/save}" th:object="${laptop}" method="post">
-        <div class="mt-3">
+        <div class="mb-3">
             <label>Thương hiệu:</label>
-            <input type="text" th:field="*{brand}" class="form-control" required />
+            <input type="text" th:field="*{brand}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></div>
         </div>
-        <div class="mt-3">
+        <div class="mb-3">
             <label>Model:</label>
-            <input type="text" th:field="*{model}" class="form-control" required />
+            <input type="text" th:field="*{model}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></div>
         </div>
-        <div class="mt-3">
+        <div class="mb-3">
             <label>Giá:</label>
-            <input type="text" th:field="*{price}" class="form-control" required />
+            <input type="text" th:field="*{price}" class="form-control" />
+            <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
         </div>
         <button type="submit" class="btn btn-success">Lưu</button>
         <a href="/laptops" class="btn btn-secondary">Huỷ</a>

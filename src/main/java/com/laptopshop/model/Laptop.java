@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class Laptop {
@@ -12,14 +13,20 @@ public class Laptop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "Thương hiệu không được để trống")
     private String brand;
+
+    @NotBlank(message = "Model không được để trống")
     private String model;
-    private double price;
+
+    @Min(value = 1, message = "Giá phải lớn hơn 0")
+    @NotNull(message = "Model không được để trống")
+    private Double price;
 
     public Laptop() {
     }
 
-    public Laptop(String brand, String model, double price) {
+    public Laptop(String brand, String model, Double price) {
         this.brand = brand;
         this.model = model;
         this.price = price;
@@ -49,11 +56,11 @@ public class Laptop {
         this.model = model;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

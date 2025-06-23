@@ -4,9 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.laptopshop.repository.LaptopRepository;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
 
 @Controller
 public class LaptopController {
@@ -28,9 +33,26 @@ public class LaptopController {
         return "laptop-form";
     }
 
-    @PostMapping("laptops/save")
-    public String saveLaptop(@ModelAttribute("laptop") com.laptopshop.model.Laptop laptop) {
+    @PostMapping("/laptops/save")
+    public String saveLaptop(@Valid @ModelAttribute("laptop") com.laptopshop.model.Laptop laptop,
+            BindingResult result) {
+        if (result.hasErrors()) {
+            return "laptop-form";
+        }
         repository.save(laptop);
+        return "redirect:/laptops";
+    }
+
+    @GetMapping("/laptops/edit/{id}")
+    public String editLaptop(@PathVariable Long id, Model model) {
+        var laptop = repository.findById(id).orElse(null);
+        model.addAttribute("laptop", laptop);
+        return "laptop-form";
+    }
+
+    @GetMapping("/laptops/delete/{id}")
+    public String deleteLaptop(@PathVariable Long id, Model model) {
+        repository.deleteById(id);
         return "redirect:/laptops";
     }
 

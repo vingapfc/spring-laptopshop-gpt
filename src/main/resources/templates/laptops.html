@@ -26,6 +26,10 @@
                 <td th:text="${lap.brand}"></td>
                 <td th:text="${lap.model}"></td>
                 <td th:text="${lap.price} + ' USD'"></td>
+                <td>
+                    <a th:href="@{'/laptops/edit/' + ${lap.id}}" class="btn btn-warning btn-sm">Sửa</a>
+                    <a th:href="@{'/laptops/delete/' + ${lap.id}}" class="btn btn-danger btn-sm">Xoá</a>
+                </td>
             </tr>
         </tbody>
     </table>
